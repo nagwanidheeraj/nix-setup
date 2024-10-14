@@ -10,7 +10,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }: let
-    system = "__SYSTEM__";
+    system = "aarch64-darwin";
     hostname = "__HOSTNAME__";
     username = "__USERNAME__";
     useremail = "__USEREMAIL";
