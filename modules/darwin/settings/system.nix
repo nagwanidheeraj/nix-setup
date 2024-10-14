@@ -1,7 +1,12 @@
-{ pkgs, inputs, ... }: {
+{ inputs, ... }: {
   system = {
     stateVersion = 5;
     configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+
+    activationScripts.postUserActivation.text = ''
+      # Following line should allow us to avoid a logout/login cycle
+      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    '';
 
     keyboard = {
       enableKeyMapping = true;
@@ -10,7 +15,7 @@
 
     defaults = {
       NSGlobalDomain = {
-        "com.apple.mouse.tapBehavior" = 1;
+        AppleInterfaceStyle = "Dark";
         AppleShowAllExtensions = true;
         NSNavPanelExpandedStateForSaveMode = true;
       };
@@ -22,10 +27,18 @@
 
       finder = {
         AppleShowAllExtensions = true;
-        FXPreferredViewStyle = "Nslv";
+        FXPreferredViewStyle = "Nlsv";
         ShowPathbar = true;
         ShowStatusBar = true;
         _FXShowPosixPathInTitle = true;
+      };
+
+      trackpad.TrackpadThreeFingerDrag = true;
+      trackpad.Clicking = true;
+
+      CustomUserPreferences = {
+        "com.apple.Safari".IncludeDevelopMenu = true;
+        "com.apple.Safari.SandboxBroker".ShowDevelopMenu = true;
       };
     };
   };

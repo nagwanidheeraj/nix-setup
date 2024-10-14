@@ -18,7 +18,7 @@
   };
 
   imports = [
-    ./settings/system.nix
     ./settings/environment.nix
+    ./settings/system.nix
   ];
 }
